@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"golang.org/x/net/context"
+	"github.com/gorilla/mux"
 
 	"github.com/go-kit/kit/endpoint"
 	"github.com/go-kit/kit/log"
@@ -90,7 +91,8 @@ func (s Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := s.e(ctx, request)
+	vars := mux.Vars(r)
+	response, err := s.e(ctx, request, vars)
 	if err != nil {
 		s.logger.Log("err", err)
 		s.errorEncoder(w, err)
