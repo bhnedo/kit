@@ -8,7 +8,7 @@ import (
 
 // Endpoint is the fundamental building block of servers and clients.
 // It represents a single RPC method.
-type Endpoint func(ctx context.Context, request interface{}) (response interface{}, err error)
+type Endpoint func(ctx context.Context, request interface{}, vars map[string]string) (response interface{}, err error)
 
 // Middleware is a chainable behavior modifier for endpoints.
 type Middleware func(Endpoint) Endpoint
