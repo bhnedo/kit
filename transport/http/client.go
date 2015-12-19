@@ -55,7 +55,7 @@ func SetClientBefore(before ...RequestFunc) ClientOption {
 // Endpoint returns a usable endpoint that will invoke the RPC specified by
 // the client.
 func (c Client) Endpoint() endpoint.Endpoint {
-	return func(ctx context.Context, request interface{}) (interface{}, error) {
+	return func(ctx context.Context, request interface{}, vars map[string]string) (interface{}, error) {
 		ctx, cancel := context.WithCancel(ctx)
 		defer cancel()
 
